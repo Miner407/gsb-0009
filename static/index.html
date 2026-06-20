@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园失物招领看板</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>🎓 校园失物招领看板</h1>
+        <p class="subtitle">发布信息，帮助大家找回遗失的物品</p>
+    </header>
+
+    <main class="container">
+        <section class="action-bar">
+            <button id="openFormBtn" class="btn btn-primary">+ 发布信息</button>
+
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="🔍 搜索物品名称、描述、地点...">
+
+                <select id="typeFilter">
+                    <option value="">全部类型</option>
+                    <option value="lost">🔴 失物</option>
+                    <option value="found">🟢 招领</option>
+                </select>
+
+                <select id="locationFilter">
+                    <option value="">全部地点</option>
+                </select>
+
+                <select id="statusFilter">
+                    <option value="">全部状态</option>
+                    <option value="open">开放中</option>
+                    <option value="claimed">已认领</option>
+                    <option value="closed">已关闭</option>
+                </select>
+            </div>
+        </section>
+
+        <section id="itemGrid" class="item-grid">
+        </section>
+
+        <div id="emptyState" class="empty-state" style="display:none;">
+            <div class="empty-icon">📭</div>
+            <p>暂无相关信息，试试调整筛选条件或发布第一条信息吧！</p>
+        </div>
+    </main>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="formTitle">发布信息</h2>
+                <button class="close-btn" id="closeFormBtn">&times;</button>
+            </div>
+            <form id="itemForm" class="form">
+                <div class="form-group">
+                    <label>信息类型 *</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="item_type" value="lost" required> 🔴 我丢了东西</label>
+                        <label><input type="radio" name="item_type" value="found"> 🟢 我捡到了东西</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">物品名称 *</label>
+                    <input type="text" id="title" name="title" placeholder="例如：黑色钱包、学生证" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">详细描述</label>
+                    <textarea id="description" name="description" rows="3" placeholder="描述物品特征、颜色、内含物品等"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">丢失/拾取地点 *</label>
+                        <input type="text" id="location" name="location" placeholder="例如：图书馆、一食堂、3号教学楼" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event_time">时间 *</label>
+                        <input type="datetime-local" id="event_time" name="event_time" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">联系方式 *</label>
+                    <input type="text" id="contact" name="contact" placeholder="手机号 / 微信号 / QQ号" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="image_url">图片链接 (可选)</label>
+                    <input type="url" id="image_url" name="image_url" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelFormBtn">取消</button>
+                    <button type="submit" class="btn btn-primary">发布</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

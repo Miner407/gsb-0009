@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情 - 校园失物招领看板</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+    <header class="header">
+        <h1>🎓 校园失物招领看板</h1>
+        <p class="subtitle">信息详情</p>
+    </header>
+
+    <main class="container">
+        <a href="/" class="back-link">← 返回列表</a>
+
+        <div id="detailContent" class="detail-card">
+            <div class="loading">加载中...</div>
+        </div>
+
+        <div id="actionPanel" class="action-panel" style="display:none;">
+        </div>
+    </main>
+
+    <div id="claimModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>认领信息</h2>
+                <button class="close-btn" id="closeClaimBtn">&times;</button>
+            </div>
+            <form id="claimForm" class="form">
+                <div class="form-group">
+                    <label for="claimer_name">您的姓名 *</label>
+                    <input type="text" id="claimer_name" name="claimer_name" required placeholder="请输入您的姓名">
+                </div>
+                <div class="form-group">
+                    <label for="claimer_contact">您的联系方式 *</label>
+                    <input type="text" id="claimer_contact" name="claimer_contact" required placeholder="手机号 / 微信号">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelClaimBtn">取消</button>
+                    <button type="submit" class="btn btn-primary">确认认领</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="detail.js"></script>
+</body>
+</html>
