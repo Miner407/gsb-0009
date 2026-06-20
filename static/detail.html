@@ -9,43 +9,92 @@
 </head>
 <body>
     <header class="header">
-        <h1>🎓 校园失物招领看板</h1>
-        <p class="subtitle">信息详情</p>
+        <div class="header-inner">
+            <div class="header-top">
+                <div class="brand" style="cursor:pointer;" id="backBrand">
+                    <div class="brand-icon">�</div>
+                    <div class="brand-text">
+                        <h1>校园失物招领看板</h1>
+                        <p>信息详情</p>
+                    </div>
+                </div>
+                <a id="backLink" class="btn btn-secondary btn-sm" href="/">← 返回列表</a>
+            </div>
+        </div>
     </header>
 
     <main class="container">
-        <a href="/" class="back-link">← 返回列表</a>
-
-        <div id="detailContent" class="detail-card">
-            <div class="loading">加载中...</div>
+        <div id="errorState" class="error-card" style="display:none;">
+            <div class="error-icon">⚠️</div>
+            <h3 id="errorTitle">加载失败</h3>
+            <p id="errorDesc">无法加载该信息详情</p>
+            <a class="btn btn-primary" href="/">返回首页</a>
         </div>
 
-        <div id="actionPanel" class="action-panel" style="display:none;">
+        <div id="loadingState" class="detail-card">
+            <div class="loading-inner">
+                <div class="spinner"></div>
+                <div>正在加载信息详情...</div>
+            </div>
         </div>
+
+        <div id="detailContent" style="display:none;"></div>
+
+        <div id="actionPanel" class="action-panel" style="display:none;"></div>
     </main>
 
     <div id="claimModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>认领信息</h2>
+                <h2>认领此信息</h2>
                 <button class="close-btn" id="closeClaimBtn">&times;</button>
             </div>
             <form id="claimForm" class="form">
                 <div class="form-group">
-                    <label for="claimer_name">您的姓名 *</label>
-                    <input type="text" id="claimer_name" name="claimer_name" required placeholder="请输入您的姓名">
+                    <label for="claimer_name">您的姓名 <span class="required">*</span></label>
+                    <input type="text" id="claimer_name" name="claimer_name" required placeholder="请输入您的真实姓名">
                 </div>
                 <div class="form-group">
-                    <label for="claimer_contact">您的联系方式 *</label>
-                    <input type="text" id="claimer_contact" name="claimer_contact" required placeholder="手机号 / 微信号">
+                    <label for="claimer_contact">您的联系方式 <span class="required">*</span></label>
+                    <input type="text" id="claimer_contact" name="claimer_contact" required placeholder="手机号 / 微信号，便于发布者联系您">
+                </div>
+                <div class="form-group">
+                    <label for="claim_remark">备注信息 (可选)</label>
+                    <textarea id="claim_remark" name="claim_remark" rows="2" placeholder="描述认领依据或补充说明"></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="cancelClaimBtn">取消</button>
-                    <button type="submit" class="btn btn-primary">确认认领</button>
+                    <button type="submit" class="btn btn-success" id="submitClaimBtn">✅ 确认认领</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <div id="remarkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>添加处理备注</h2>
+                <button class="close-btn" id="closeRemarkBtn">&times;</button>
+            </div>
+            <form id="remarkForm" class="form">
+                <div class="form-group">
+                    <label for="remark_text">备注内容 <span class="required">*</span></label>
+                    <textarea id="remark_text" name="remark_text" rows="4" required placeholder="记录沟通进展、处理过程、补充说明等"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="remark_operator">操作人标识 (可选)</label>
+                    <input type="text" id="remark_operator" name="remark_operator" placeholder="例如：管理员 / 王同学 / 手机号...">
+                    <div class="helper">用于标识是谁添加的这条备注，便于追踪</div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelRemarkBtn">取消</button>
+                    <button type="submit" class="btn btn-primary" id="submitRemarkBtn">📝 添加备注</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="closeConfirmDialog" class="confirm-dialog" style="display:none;"></div>
 
     <div id="toast" class="toast"></div>
 
